@@ -1,13 +1,8 @@
-import { Sequelize } from 'sequelize'
+import { Sequelize } from "sequelize"
+import { DATABASE_URL } from "../config/enviroment"
 
-export const sequelize = new Sequelize({
-  dialect: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  database: 'atomnet_development',
-  username: 'root',
-  password: 'K#A@j173*17g',
-	define: {
-    underscored: true
-  }
+export const sequelize = new Sequelize(DATABASE_URL, {
+    define: {
+        underscored: true
+    }
 })
