@@ -32,6 +32,7 @@ export const QuestionACategory = sequelize.define<QuestionInstance, QuestionACat
   },
   control: {
     allowNull: false,
+    unique: true,
     type: DataTypes.STRING
   },
   theme: {

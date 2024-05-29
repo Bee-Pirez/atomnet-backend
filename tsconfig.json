@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2016",
+    "jsx": "react", 
     "module": "commonjs",
+    // "moduleResolution": "NodeNext",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

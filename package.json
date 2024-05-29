@@ -4,16 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
+    "build": "tsc",
+    "start": "node .dist/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@adminjs/express": "^5.1.0",
+    "@adminjs/sequelize": "^3.0.0",
+    "adminjs": "^6.8.7",
     "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "env-var": "^7.4.1",
     "express": "^4.19.2",
+    "express-formidable": "^1.2.0",
     "jsonwebtoken": "~8.5.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.7",
@@ -21,7 +28,9 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.7",
     "sequelize-cli": "^6.6.2",
     "ts-node-dev": "^2.0.0",

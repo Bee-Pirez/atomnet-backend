@@ -1,9 +1,66 @@
 import { QuestionACategory } from "../models"
 import { QuestionA } from "../models"; 
+import { paginateResults } from '../helpers/getPaginationParams';
 
 
 export const questionACategoryService = {
-  findByIdWithQuestionsA: async (id: string) => {
+  findAllWithPagination: async (page: number, pageSize: number) => {
+    try {
+      const allCategories = await QuestionACategory.findAll({
+        attributes: ['id', 'category', 'control', 'theme', 'description'],
+        include: {
+          model: QuestionA,
+          as: 'questionsA',
+          attributes: ['id', 'question']
+        }
+      });
+
+      const paginatedCategories = paginateResults(page, pageSize, allCategories);
+
+      return paginatedCategories;
+    } catch (error) {
+      throw new Error("Failed to fetch categories with pagination.");
+    }
+  },
+
+
+  
+
+
+//   findAllPaginated: async (page: number, perPage: number) => {
+//     const offset = (page - 1) * perPage
+
+//     const { count, rows } = await Category.findAndCountAll({
+//         attributes: ['id', 'name', 'position'],
+//         order: [['position', 'ASC']],
+//         limit: perPage,
+//         offset
+//     })
+
+//     return {
+//         categories: rows,
+//         page,
+//         perPage,
+//         total: count
+//     }
+// },
+
+//   findAllPaginated: async () => {
+//     try {
+//       const categoriesWithQuestions = await QuestionACategory.findAll({
+//         include: {
+//           model: QuestionA,
+//           as: 'questionsA',
+//           attributes: ['id', 'question']
+//         }
+//       });
+//       return categoriesWithQuestions;
+//     } catch (error) {
+//       throw new Error("Failed to find categories with questions.");
+//     }
+//   },
+
+findByIdWithQuestionsA: async (id: string) => {
     try {
       const categoryWithQuestions = await QuestionACategory.findByPk(id, {
         attributes: ['id', 'category', 'control', 'theme', 'description'],
