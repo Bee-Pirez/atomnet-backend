@@ -32,4 +32,6 @@ export const FormSubmission = sequelize.define<FormInstance, FormSubmission>('Fo
     onUpdate: 'CASCADE',
     onDelete: 'RESTRICT'
   },
+  }, {
+  tableName: 'form_submisions'
 })
