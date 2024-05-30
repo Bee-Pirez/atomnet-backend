@@ -2,19 +2,19 @@ import { sequelize } from '../database'
 import { DataTypes, Model, Optional } from "sequelize"
 
 //interface para o objeto
-export interface AnswerA {
+export interface Answer {
   id: number
   isApplicable: boolean
-  formAId: number
-  questionAId: number
+  formSubmissionId: number
+  questionId: number
 }
 
-export interface AnswerCreationAttributes extends Optional<AnswerA, 'id'> {}
+export interface AnswerCreationAttributes extends Optional<Answer, 'id'> {}
 
 //interface para instancia
-export interface AnswerInstance extends Model<AnswerA, AnswerCreationAttributes>, AnswerA {}
+export interface AnswerInstance extends Model<Answer, AnswerCreationAttributes>, Answer {}
 
-export const AnswerA = sequelize.define<AnswerInstance, AnswerA>('AnswerA', {
+export const Answer = sequelize.define<AnswerInstance, Answer>('Answer', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -25,17 +25,17 @@ export const AnswerA = sequelize.define<AnswerInstance, AnswerA>('AnswerA', {
     allowNull: false,
     type: DataTypes.BOOLEAN
   },
-  formAId: {
+  formSubmissionId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    references: { model: 'forms_a', key: 'id' },
+    references: { model: 'form_submissions', key: 'id' },
     onUpdate: 'CASCADE',
     onDelete: 'RESTRICT'
   },
-  questionAId: {
+  questionId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    references: { model: 'questions_a', key: 'id' },
+    references: { model: 'questions', key: 'id' },
     onUpdate: 'CASCADE',
     onDelete: 'RESTRICT'
   }

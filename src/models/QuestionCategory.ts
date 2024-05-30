@@ -2,7 +2,7 @@ import { sequelize } from '../database'
 import { DataTypes, Model, Optional } from "sequelize"
 
 //interface para o objeto
-export interface QuestionACategory {
+export interface QuestionCategory {
   id: number;
   category: string;
   control: string;
@@ -14,12 +14,12 @@ export interface QuestionACategory {
 
 //atributos de criação que serão usados durante a criação de um novo objeto 
 //e falo que ele não vai ter id durante a criação
-export interface QuestionCreationAttributes extends Optional<QuestionACategory, 'id'> {}
+export interface QuestionCreationAttributes extends Optional<QuestionCategory, 'id'> {}
 
 //interface para instancia
-export interface QuestionInstance extends Model<QuestionACategory, QuestionCreationAttributes>, QuestionACategory {}
+export interface QuestionInstance extends Model<QuestionCategory, QuestionCreationAttributes>, QuestionCategory {}
 
-export const QuestionACategory = sequelize.define<QuestionInstance, QuestionACategory>('QuestionACategory', {
+export const QuestionCategory = sequelize.define<QuestionInstance, QuestionCategory>('QuestionCategory', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -54,5 +54,5 @@ export const QuestionACategory = sequelize.define<QuestionInstance, QuestionACat
     field: 'updated_at' 
   },
   }, {
-    tableName: 'questions_a_categories'  // Adicionando explicitamente o nome da tabela
+    tableName: 'question_categories'  // Adicionando explicitamente o nome da tabela
 })

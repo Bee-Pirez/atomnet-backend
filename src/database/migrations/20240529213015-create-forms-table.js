@@ -3,24 +3,25 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('forms_a', {
+    await queryInterface.createTable('forms', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.DataTypes.INTEGER
       },
-      send_date: {
+      form_name: {
         allowNull: false,
-        type: Sequelize.DataTypes.DATE
+        type: Sequelize.DataTypes.STRING
       },
-      user_id: {
+      created_at: {
         allowNull: false,
-        type: Sequelize.DataTypes.INTEGER,
-        references: { model: 'users', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
+        type: Sequelize.DATE
       },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
     })
   },
 
@@ -29,7 +30,7 @@ module.exports = {
      * Add reverting commands here.
      *
      * Example:
-     * await queryInterface.dropTable('forms_a');
+     * await queryInterface.dropTable('forms');
      */
   }
 };

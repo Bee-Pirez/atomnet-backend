@@ -2,7 +2,7 @@ import { BrandingOptions } from "adminjs";
 
 export const brandingOptions: BrandingOptions = {
   companyName: "Atom Technology",
-  logo: "/logoAtom.svg",
+  logo: "/logoIcon.svg",
   theme: {
     colors: {
       primary100: "#302fbb",

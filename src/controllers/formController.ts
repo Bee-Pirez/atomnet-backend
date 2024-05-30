@@ -4,14 +4,17 @@
 import { Response } from "express";
 import { AuthenticatedRequest } from "../middlewares/auth";
 import { formService } from "../services/formService";
-import { FormInstance } from "../models/FormA";
+import { FormInstance } from "../models/FormSubmission";
 
 interface ErrorResponse {
   message: string;
 }
 
 export const formsController = {
-  findByCurrentUser: async (req: AuthenticatedRequest, res: Response<FormInstance | ErrorResponse>) => {
+  findByCurrentUser: async (
+    req: AuthenticatedRequest,
+    res: Response<FormInstance | ErrorResponse>
+  ) => {
     const userId = req.user ? req.user.id : null;
 
     if (!userId) {

@@ -1,19 +1,29 @@
 //Definir as associações dos meus models e tabelas
-import { QuestionA } from "./QuestionA";
-import { QuestionACategory } from "./QuestionACategory";
-import { FormA } from "./FormA";
-import { AnswerA } from "./AnswerA";
+import { Question } from "./Question";
+import { QuestionCategory } from "./QuestionCategory";
+import { FormSubmission } from "./FormSubmission";
+import { Form } from "./Form";
+import { Answer } from "./Answer";
 import { User } from "./User";
 
-QuestionA.hasOne(AnswerA); // Uma pergunta só pode ter uma resposta por formulário
-AnswerA.belongsTo(QuestionA); // Uma resposta pertence a uma pergunta
+User.hasMany(FormSubmission)
+FormSubmission.belongsTo(User)
 
-QuestionA.belongsTo(QuestionACategory, { foreignKey: 'questionACategoryId' });
-QuestionACategory.hasMany(QuestionA, { as: 'questionsA', foreignKey: 'questionACategoryId' });
+Form.hasMany(Question)
+Question.belongsTo(Form)
+
+QuestionCategory.hasMany(Question, {
+  as: "questions",
+  foreignKey: "questionCategoryId",
+})
+Question.belongsTo(QuestionCategory, { foreignKey: "questionCategoryId" })
+
+Question.hasOne(Answer)
+Answer.belongsTo(Question)
+
+FormSubmission.hasMany(Answer)
+Answer.belongsTo(FormSubmission)
 
 
-FormA.hasMany(AnswerA); // Um FormA pode ter várias AnswerA
-AnswerA.belongsTo(FormA); // Uma AnswerA só pode pertencer a um form
-User.hasOne(FormA)
 
-export { QuestionA, QuestionACategory, FormA, AnswerA, User };
+export { User, FormSubmission, Form, Question, QuestionCategory, Answer};

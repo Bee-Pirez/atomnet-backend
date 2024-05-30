@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('answers_a', {
+    await queryInterface.createTable('answers', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,17 +14,17 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DataTypes.BOOLEAN
       },
-      form_a_id: {
+      form_submission_id: {
         allowNull: false,
         type: Sequelize.DataTypes.INTEGER,
-        references: { model: 'forms_a', key: 'id' },
+        references: { model: 'form_submissions', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
       },
-      question_a_id: {
+      question_id: {
         allowNull: false,
         type: Sequelize.DataTypes.INTEGER,
-        references: { model: 'questions_a', key: 'id' },
+        references: { model: 'questions', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
       },
@@ -44,7 +44,7 @@ module.exports = {
      * Add reverting commands here.
      *
      * Example:
-     * await queryInterface.dropTable('answers_a');
+     * await queryInterface.dropTable('users');
      */
   }
 };
