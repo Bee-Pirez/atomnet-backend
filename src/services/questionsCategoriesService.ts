@@ -1,15 +1,15 @@
-import { QuestionACategory } from "../models"
-import { QuestionA } from "../models"; 
+import { QuestionCategory } from "../models"
+import { Question } from "../models"; 
 import { paginateResults } from '../helpers/getPaginationParams';
 
 
-export const questionACategoryService = {
+export const questionCategoryService = {
   findAllWithPagination: async (page: number, pageSize: number) => {
     try {
-      const allCategories = await QuestionACategory.findAll({
+      const allCategories = await QuestionCategory.findAll({
         attributes: ['id', 'category', 'control', 'theme', 'description'],
         include: {
-          model: QuestionA,
+          model: Question,
           as: 'questionsA',
           attributes: ['id', 'question']
         }
@@ -62,10 +62,10 @@ export const questionACategoryService = {
 
 findByIdWithQuestionsA: async (id: string) => {
     try {
-      const categoryWithQuestions = await QuestionACategory.findByPk(id, {
+      const categoryWithQuestions = await QuestionCategory.findByPk(id, {
         attributes: ['id', 'category', 'control', 'theme', 'description'],
         include: {
-          model: QuestionA,
+          model: Question,
           as: 'questionsA',
           attributes: ['id', 'question']
         }

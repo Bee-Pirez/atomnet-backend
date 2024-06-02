@@ -20,7 +20,7 @@ module.exports = {
         unique: true
       },
       theme: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DataTypes.STRING
       },
       description: {

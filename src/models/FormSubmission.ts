@@ -4,8 +4,9 @@ import { DataTypes, Model, Optional } from "sequelize"
 //interface para o objeto
 export interface FormSubmission {
   id: number
-  sendDate: Date
-  userId: number
+  formId: number
+  userId:number
+  createdAt?: Date;
 }
 
 export interface FormCreationAttributes extends Optional<FormSubmission, 'id'> {}
@@ -20,10 +21,12 @@ export const FormSubmission = sequelize.define<FormInstance, FormSubmission>('Fo
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  sendDate: {
+  formId: {
     allowNull: false,
-    type: DataTypes.DATE,
-    field: "send_date",
+    type: DataTypes.INTEGER,
+    references: { model: 'forms', key: 'id' },
+    onUpdate: 'CASCADE',
+    onDelete: 'RESTRICT'
   },
   userId: {
     allowNull: false,
@@ -32,6 +35,10 @@ export const FormSubmission = sequelize.define<FormInstance, FormSubmission>('Fo
     onUpdate: 'CASCADE',
     onDelete: 'RESTRICT'
   },
+  createdAt: {
+    allowNull: false,
+    type: DataTypes.DATE
+  },
   }, {
-  tableName: 'form_submisions'
+  tableName: 'form_submissions'
 })

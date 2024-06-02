@@ -1,19 +1,19 @@
 import { Request, Response } from 'express'
-import { QuestionACategory } from '../models'
-import { QuestionA } from '../models'
-import { questionACategoryService } from '../services/questionsACategoriesService'
+import { QuestionCategory } from '../models'
+import { Question } from '../models'
+import { questionCategoryService } from '../services/questionsCategoriesService'
 
 
-export const questionsACategoriesController = {
+export const questionsCategoriesController = {
   //função assíncrona para controllar a rota (caminho da rota e função de callback para comportamento quando a rota for chamada)
   index: async (req: Request, res: Response) => {
     try {
-      const questionsACategories = await QuestionACategory.findAll({
+      const questionsCategories = await QuestionCategory.findAll({
         attributes: ['id', 'category', 'control', 'theme', 'description'],
         order: [['category', 'ASC']]
       })
   
-      return res.json(questionsACategories)
+      return res.json(questionsCategories)
     } catch (err) {
       if (err instanceof Error) {
         return res.status(400).json({ message: err.message })
@@ -26,7 +26,7 @@ export const questionsACategoriesController = {
     const { id } = req.params
 
     try {
-      const category = await questionACategoryService.findByIdWithQuestionsA(id)
+      const category = await questionCategoryService.findByIdWithQuestionsA(id)
       return res.json(category)
     } catch (err) {
       if (err instanceof Error) {
@@ -40,12 +40,12 @@ export const questionsACategoriesController = {
     try {
       const { category, control, theme, description } = req.body;
 
-      const existingCategory = await QuestionACategory.findOne({ where: { control } });
+      const existingCategory = await QuestionCategory.findOne({ where: { control } });
       if (existingCategory) {
         return res.status(400).json({ message: 'Já existe uma categoria com o mesmo controle' });
       }
 
-      const newCategory = await QuestionACategory.create({ category, control, theme, description });
+      const newCategory = await QuestionCategory.create({ category, control, theme, description });
 
       return res.status(201).json(newCategory);
     } catch (err) {
@@ -60,15 +60,15 @@ export const questionsACategoriesController = {
     const { id } = req.params;
 
     try {
-      const associatedQuestions = await QuestionA.findOne({
-        where: { questionACategoryId: id }
+      const associatedQuestions = await Question.findOne({
+        where: { questionCategoryId: id }
       });
 
       if (associatedQuestions) {
         return res.status(400).json({ message: 'Não é possível deletar a categoria porque existem perguntas associadas a ela' });
       }
 
-      const deletionResult = await QuestionACategory.destroy({
+      const deletionResult = await QuestionCategory.destroy({
         where: { id }
       });
 
@@ -129,7 +129,7 @@ export const questionsACategoriesController = {
       const page = parseInt(req.query.page as string) || 1; // Página atual
       const pageSize = parseInt(req.query.pageSize as string) || 5; // Tamanho da página
 
-      const paginatedCategories = await questionACategoryService.findAllWithPagination(page, pageSize);
+      const paginatedCategories = await questionCategoryService.findAllWithPagination(page, pageSize);
 
       return res.json(paginatedCategories);
     } catch (error) {

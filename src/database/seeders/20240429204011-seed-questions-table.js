@@ -6,7 +6,7 @@ module.exports = {
     // const [questions_categories] = await queryInterface.sequelize.query('SELECT id FROM questions_categorys;')
 
     await queryInterface.bulkInsert('questions', [
-      { question: 'Existe uma política de segurança da informação na organização?', form_id: 1, form_id: 1, question_category_id: 1, created_at: new Date(), updated_at: new Date() },
+      { question: 'Existe uma política de segurança da informação na organização?', form_id: 1, question_category_id: 1, created_at: new Date(), updated_at: new Date() },
       { question: 'São aprovadas e publicadas as políticas de PSI, e são comunicadas aos funcionários e partes externas?', form_id: 1, question_category_id: 1, created_at: new Date(), updated_at: new Date() },
       { question: 'As políticas são regularmente revisadas?', form_id: 1, question_category_id: 1, created_at: new Date(), updated_at: new Date() },
 

@@ -11,18 +11,13 @@ const formSubmissionResourceOptions: ResourceOptions = {
     }
   },
   filterProperties: [
-    'sendDate',
-    'userId',
+    'createdAt'
   ],
   listProperties: [
     'id',
-    'sendDate',
-    'userId',
   ],
   showProperties: [
-    'id',
-    'sendDate',
-    'userId',
+    'id', 'createdAt',
   ],
 }
 

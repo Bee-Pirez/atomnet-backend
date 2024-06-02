@@ -16,7 +16,7 @@ QuestionCategory.hasMany(Question, {
   as: "questions",
   foreignKey: "questionCategoryId",
 })
-Question.belongsTo(QuestionCategory, { foreignKey: "questionCategoryId" })
+Question.belongsTo(QuestionCategory)
 
 Question.hasOne(Answer)
 Answer.belongsTo(Question)
